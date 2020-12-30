@@ -1,18 +1,20 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Racing {
 
     class Program {
 
         const string GAME_PATH = "../../../game.json";
+        static Dictionary<Vehicle, VehicleState> _results = null;
 
         static void Main() {
-            if (WannaPlay())
+            while (WannaPlay())
                 PlayGame();
-            else 
-                GoodBye();
+            GoodBye();
         }
 
         static void PlayGame() {
@@ -21,15 +23,41 @@ namespace Racing {
             Console.WriteLine("Сегодня в гонках участвуют:");
             Console.WriteLine();
             for (int i = 1; i <= game.Vehicles.Count; i++) {
-                Console.WriteLine($"{i}. {game.Vehicles[i-1]}");
+                Console.WriteLine($"{i}. {game.Vehicles[i - 1]}");
             }
             Console.WriteLine();
             Console.WriteLine("ПОЕХАЛИ...");
-            Console.WriteLine($"ПОБЕДИТЕЛЬ : {game.RunRace().Name}");
+            _results = game.RunRace(OnUpdate);
         }
 
+        /// <summary>
+        /// Событие сделано для того чтобы отделить UI часть от собственно игры
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="vehicle"></param>
+        /// <param name="state"></param>
+        static void OnUpdate(int index, Vehicle vehicle, VehicleState state) {
+            string info = $"{vehicle.Name} : {state.Traveled}";
+            Console.SetCursorPosition(0, 10 + index);
+            Console.WriteLine(info);
+        }
+
+        static void PrintResults() {
+            if (_results is not null) {
+                Console.Clear();
+                Console.WriteLine("Таблица результатов");
+                Console.WriteLine();
+                _results = _results.OrderByDescending(x => x.Value.Traveled).ToDictionary(x => x.Key, x => x.Value);
+                foreach (Vehicle vehicle in _results.Keys) {
+                    Console.WriteLine($"{vehicle.Name} {_results[vehicle].Traveled}");
+                }
+                PrintCentered(new string[] { "Нажмите любую клавишу для выхода" });
+                Console.ReadKey();
+            }
+        }
 
         static bool WannaPlay() {
+            PrintResults();
             Console.Clear();
             PrintCentered(new string[] { "Игра ГОНКИ", "", "1 - Играть, 0 - Выход", "", "2020 - Андрей Тедеев" });
             while (true) {

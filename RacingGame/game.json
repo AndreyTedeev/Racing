@@ -1,6 +1,6 @@
 {
   "$type": "Racing.Game, RacingGame",
-  "Distance": 5000,
+  "Distance": 3000,
   "Vehicles": {
     "$type": "System.Collections.Generic.List`1[[Racing.Vehicle, RacingGame]], System.Private.CoreLib",
     "$values": [
