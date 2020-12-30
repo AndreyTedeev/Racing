@@ -45,7 +45,7 @@ namespace RacingTest {
 
             game = JsonConvert.DeserializeObject<Game>(File.ReadAllText(GAME_PATH), settings);
 
-            Assert.IsTrue(game.Distance == 1000);
+            Assert.IsTrue(game.Distance == 5000);
             Assert.IsTrue(game.Vehicles.Count == 3);
             Assert.IsTrue(game.Vehicles[0].GetType().Equals(typeof(Truck)));
             Assert.IsTrue(game.Vehicles[1].GetType().Equals(typeof(Car)));

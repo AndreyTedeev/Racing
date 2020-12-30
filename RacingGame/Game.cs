@@ -21,6 +21,11 @@ namespace Racing {
         private bool _running = false;
         private Random _random;
 
+        /// <summary>
+        /// запуск игры
+        /// </summary>
+        /// <param name="OnUpdate"></param>
+        /// <returns></returns>
         public Dictionary<Vehicle, VehicleState> RunRace(Action<int, Vehicle, VehicleState> OnUpdate) {
             _states = new();
             _running = true;
@@ -34,6 +39,10 @@ namespace Racing {
             return _states;
         }
 
+        /// <summary>
+        /// Проверяем состояние и изменяем положение объектов 
+        /// </summary>
+        /// <param name="OnUpdate"></param>
         private void Update(Action<int, Vehicle, VehicleState> OnUpdate) {
             int pos = 0;
             int mostTraveled = 0;
@@ -56,6 +65,11 @@ namespace Racing {
             _running = (mostTraveled < Distance);
         }
 
+        /// <summary>
+        /// Проверяем пробито колесо или нет
+        /// </summary>
+        /// <param name="probability"></param>
+        /// <returns></returns>
         private bool CheckFlatTire(int probability) => _random.Next(1, 101) <= probability;
 
     }
