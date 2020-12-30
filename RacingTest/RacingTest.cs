@@ -22,16 +22,19 @@ namespace RacingTest {
                     new Truck {
                         Speed = 50.00,
                         FlatTireProbability = 5,
+                        ChangeTireTime = 10,
                         CargoWeight = 1000
                     },
                     new Car {
                         Speed = 100.00,
                         FlatTireProbability = 3,
+                        ChangeTireTime = 10,
                         PassengerCount = 4
                     },
                     new Motorcycle {
                         Speed = 120.00,
                         FlatTireProbability = 10,
+                        ChangeTireTime = 10,
                         HasSidecar = false
                     }
                 }

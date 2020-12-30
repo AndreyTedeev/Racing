@@ -27,6 +27,16 @@ namespace Racing {
         /// </summary>
         public double Speed { get; set; }
 
+        /// <summary>
+        /// Скорость движения м/с
+        /// </summary>
+        public int SpeedInMetersPerSecond => (int) Speed * 1000 / 360;
+
+        /// <summary>
+        /// Время на замену колеса в секундах
+        /// </summary>
+        public int ChangeTireTime { get; set; }
+
         public override string ToString() {
             return $"Скорость: {Speed} км/ч, Вероятность прокола: {FlatTireProbability} %";
         }

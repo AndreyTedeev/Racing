@@ -19,9 +19,12 @@ namespace Racing {
             Console.Clear();
             Game game = LoadFromFile(GAME_PATH);
             Console.WriteLine("Сегодня в гонках участвуют:");
+            Console.WriteLine();
             for (int i = 1; i <= game.Vehicles.Count; i++) {
                 Console.WriteLine($"{i}. {game.Vehicles[i-1]}");
             }
+            Console.WriteLine("ПОЕХАЛИ...");
+            Console.WriteLine($"ПОБЕДИТЕЛЬ : {game.RunRace()}");
         }
 
         static bool WannaPlay() {
