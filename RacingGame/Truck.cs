@@ -13,8 +13,10 @@ namespace Racing {
         /// </summary>
         public int CargoWeight { get; set; }
 
+        public override string Name => "ГРУЗОВИК";
+
         public override string ToString() {
-            return $"ГРУЗОВИК | {base.ToString()}, Вес груза: {CargoWeight}"; 
+            return $"{base.ToString()}, Вес груза: {CargoWeight}"; 
         }
 
     }

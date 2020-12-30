@@ -23,9 +23,11 @@ namespace Racing {
             for (int i = 1; i <= game.Vehicles.Count; i++) {
                 Console.WriteLine($"{i}. {game.Vehicles[i-1]}");
             }
+            Console.WriteLine();
             Console.WriteLine("ПОЕХАЛИ...");
-            Console.WriteLine($"ПОБЕДИТЕЛЬ : {game.RunRace()}");
+            Console.WriteLine($"ПОБЕДИТЕЛЬ : {game.RunRace().Name}");
         }
+
 
         static bool WannaPlay() {
             Console.Clear();

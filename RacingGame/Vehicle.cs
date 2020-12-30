@@ -22,6 +22,8 @@ namespace Racing {
             }
         }
 
+        public abstract string Name { get; }
+
         /// <summary>
         /// Скорость движения км/час
         /// </summary>
@@ -38,7 +40,7 @@ namespace Racing {
         public int ChangeTireTime { get; set; }
 
         public override string ToString() {
-            return $"Скорость: {Speed} км/ч, Вероятность прокола: {FlatTireProbability} %";
+            return $"{Name} | Скорость: {Speed} км/ч, Вероятность прокола: {FlatTireProbability} %";
         }
 
     }
