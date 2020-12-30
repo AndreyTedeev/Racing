@@ -46,7 +46,7 @@ namespace RacingTest {
             Assert.IsTrue(game.Vehicles.Count == 3);
             Assert.IsTrue(game.Vehicles[0].GetType().Equals(typeof(Truck)));
             Assert.IsTrue(game.Vehicles[1].GetType().Equals(typeof(Car)));
-            Assert.IsTrue(game.Vehicles[1].GetType().Equals(typeof(Motorcycle)));
+            Assert.IsTrue(game.Vehicles[2].GetType().Equals(typeof(Motorcycle)));
         }
 
     }
