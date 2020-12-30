@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Racing {
-    
+
     public class Truck: Vehicle {
 
         /// <summary>
