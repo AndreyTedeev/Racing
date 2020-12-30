@@ -12,5 +12,7 @@ namespace Racing {
 
         public bool IsChangingTire { get; set; } = false;
 
+        public int RepairingTime { get; set; } = 0;
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace Racing {
@@ -18,10 +19,12 @@ namespace Racing {
 
         private Dictionary<Vehicle, VehicleState> _states;
         private bool _running = false;
+        private Random _random;
 
         public Dictionary<Vehicle, VehicleState> RunRace(Action<int, Vehicle, VehicleState> OnUpdate) {
             _states = new();
             _running = true;
+            _random = new Random();
             foreach (Vehicle vehicle in Vehicles)
                 _states.Add(vehicle, new VehicleState());
             while (_running) {
@@ -37,16 +40,23 @@ namespace Racing {
             foreach (Vehicle vehicle in _states.Keys) {
                 VehicleState state = _states[vehicle];
                 OnUpdate?.Invoke(pos++, vehicle, state);
-                if (state.IsChangingTire) { }
-                else 
+                if (state.IsChangingTire) {
+                    if (++state.RepairingTime == vehicle.ChangeTireTime) { 
+                        state.IsChangingTire = false;
+                        state.RepairingTime = 0;
+                    }
+                }
+                else {
                     state.Traveled += vehicle.SpeedInMetersPerSecond;
-                // TODO: Прокол колеса
-
+                    state.IsChangingTire = CheckFlatTire(vehicle.FlatTireProbability);
+                }
                 if (state.Traveled > mostTraveled)
                     mostTraveled = state.Traveled;
             }
             _running = (mostTraveled < Distance);
         }
+
+        private bool CheckFlatTire(int probability) => _random.Next(1, 101) <= probability;
 
     }
 }

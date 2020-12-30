@@ -1,26 +1,29 @@
 {
   "$type": "Racing.Game, RacingGame",
-  "Distance": 1000,
+  "Distance": 5000,
   "Vehicles": {
     "$type": "System.Collections.Generic.List`1[[Racing.Vehicle, RacingGame]], System.Private.CoreLib",
     "$values": [
       {
         "$type": "Racing.Truck, RacingGame",
         "CargoWeight": 1000,
-        "FlatTireProbability": 5,
-        "Speed": 50.0
+        "FlatTireProbability": 10,
+        "Speed": 80.0,
+        "ChangeTireTime": 5
       },
       {
         "$type": "Racing.Car, RacingGame",
         "PassengerCount": 4,
-        "FlatTireProbability": 3,
-        "Speed": 100.0
+        "FlatTireProbability": 20,
+        "Speed": 100.0,
+        "ChangeTireTime": 4
       },
       {
         "$type": "Racing.Motorcycle, RacingGame",
         "HasSidecar": false,
-        "FlatTireProbability": 10,
-        "Speed": 120.0
+        "FlatTireProbability": 30,
+        "Speed": 100.0,
+        "ChangeTireTime": 3
       }
     ]
   }

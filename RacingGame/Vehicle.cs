@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace Racing {
             }
         }
 
+        [JsonIgnore]
         public abstract string Name { get; }
 
         /// <summary>
@@ -32,6 +34,7 @@ namespace Racing {
         /// <summary>
         /// Скорость движения м/с
         /// </summary>
+        [JsonIgnore] 
         public int SpeedInMetersPerSecond => (int) Speed * 1000 / 360;
 
         /// <summary>
