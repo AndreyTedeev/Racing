@@ -12,5 +12,9 @@ namespace Racing {
         /// Количество пассажиров
         /// </summary>
         public int PassengerCount { get; set; }
+
+        public override string ToString() {
+            return $"ЛЕГКОВОЙ | {base.ToString()}, Пассажиров: {PassengerCount}";
+        }
     }
 }

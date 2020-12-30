@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Racing {
 
-    public class Vehicle {
+    public abstract class Vehicle {
 
         private int _flatTireProbability = 0;
         
@@ -26,6 +26,10 @@ namespace Racing {
         /// Скорость движения км/час
         /// </summary>
         public double Speed { get; set; }
+
+        public override string ToString() {
+            return $"Скорость: {Speed} км/ч, Вероятность прокола: {FlatTireProbability} %";
+        }
 
     }
 }

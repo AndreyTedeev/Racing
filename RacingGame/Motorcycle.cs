@@ -13,5 +13,9 @@ namespace Racing {
         /// </summary>
         public bool HasSidecar { get; set; }
 
+        public override string ToString() {
+            var yes_no = HasSidecar ? "Да" : "Нет";
+            return $"МОТОЦИКЛ | {base.ToString()}, Наличие коляски: {yes_no}";
+        }
     }
 }

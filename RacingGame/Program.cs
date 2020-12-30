@@ -17,8 +17,11 @@ namespace Racing {
 
         static void PlayGame() {
             Console.Clear();
-            Console.WriteLine("Загружаем конфигурацию");
             Game game = LoadFromFile(GAME_PATH);
+            Console.WriteLine("Сегодня в гонках участвуют:");
+            for (int i = 1; i <= game.Vehicles.Count; i++) {
+                Console.WriteLine($"{i}. {game.Vehicles[i-1]}");
+            }
         }
 
         static bool WannaPlay() {
@@ -51,6 +54,7 @@ namespace Racing {
             };
             return JsonConvert.DeserializeObject<Game>(File.ReadAllText(GAME_PATH), settings);
         }
+
         public static void PrintCentered(string[] messages) {
             for (int i = 0; i < messages.Length; i++) {
                 int centerX = (Console.WindowWidth / 2) - (messages[i].Length / 2);
