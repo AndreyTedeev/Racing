@@ -37,7 +37,9 @@ namespace Racing {
         /// <param name="vehicle"></param>
         /// <param name="state"></param>
         static void OnUpdate(int index, Vehicle vehicle, VehicleState state) {
-            string info = $"{vehicle.Name} : {state.Traveled} : {state.IsChangingTire}                    ";
+            string changingTire = state.IsChangingTire ? "Проколото колесо" : "Все в порядке      ";
+            string traveled = String.Format("{0,5:0}", state.Traveled);
+            string info = $"{vehicle.Name} : Пройдено {traveled} м. : {changingTire}";
             Console.SetCursorPosition(0, 10 + index);
             Console.WriteLine(info);
         }

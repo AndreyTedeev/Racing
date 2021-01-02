@@ -5,19 +5,19 @@ using System.Collections.Generic;
 using System.IO;
 
 namespace RacingTest {
-    
+
     [TestClass]
     public class RacingTest {
-        
+
         const string GAME_PATH = "../../../game.json";
 
         [TestMethod]
         public void Test_Config_Serialization() {
 
             Game game = new() {
-                
+
                 Distance = 5000,
-                
+
                 Vehicles = new() {
                     new Truck {
                         Speed = 80.00,
@@ -40,7 +40,10 @@ namespace RacingTest {
                 }
             };
 
-            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All, Formatting = Formatting.Indented };
+            JsonSerializerSettings settings = new JsonSerializerSettings {
+                TypeNameHandling = TypeNameHandling.All,
+                Formatting = Formatting.Indented
+            };
             File.WriteAllText(GAME_PATH, JsonConvert.SerializeObject(game, settings));
 
             game = JsonConvert.DeserializeObject<Game>(File.ReadAllText(GAME_PATH), settings);
