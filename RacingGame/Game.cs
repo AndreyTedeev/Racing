@@ -7,9 +7,9 @@ namespace Racing {
 
     public class Game {
 
-        /// <summary>
         /// Длина круга в метрах
         /// </summary>
+        /// <summary>
         public int Distance { get; set; }
 
         /// <summary>
