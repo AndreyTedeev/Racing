@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Racing {
-    
-    public class Car: Vehicle {
+
+    public class Car : Vehicle {
 
         /// <summary>
         /// Количество пассажиров

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Racing {
 
-    public class Motorcycle: Vehicle {
+    public class Motorcycle : Vehicle {
 
         /// <summary>
         /// Наличие коляски

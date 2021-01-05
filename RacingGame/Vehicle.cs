@@ -10,16 +10,16 @@ namespace Racing {
     public abstract class Vehicle {
 
         private int _flatTireProbability = 0;
-        
+
         /// <summary>
         /// Вероятность прокола колеса в процентах (0 - 100)
         /// </summary>
-        public int FlatTireProbability { 
+        public int FlatTireProbability {
             get => _flatTireProbability;
             set {
                 if ((value < 0) || (value > 100))
                     throw new ArgumentException("Expected value in range [0- 100]");
-                _flatTireProbability = value; 
+                _flatTireProbability = value;
             }
         }
 
@@ -34,8 +34,8 @@ namespace Racing {
         /// <summary>
         /// Скорость движения м/с
         /// </summary>
-        [JsonIgnore] 
-        public int SpeedInMetersPerSecond => (int) Speed * 1000 / 360;
+        [JsonIgnore]
+        public int SpeedInMetersPerSecond => (int)Speed * 1000 / 360;
 
         /// <summary>
         /// Время на замену колеса в секундах

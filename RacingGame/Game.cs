@@ -50,12 +50,11 @@ namespace Racing {
                 VehicleState state = _states[vehicle];
                 OnUpdate?.Invoke(pos++, vehicle, state);
                 if (state.IsChangingTire) {
-                    if (++state.RepairingTime == vehicle.ChangeTireTime) { 
+                    if (++state.RepairingTime == vehicle.ChangeTireTime) {
                         state.IsChangingTire = false;
                         state.RepairingTime = 0;
                     }
-                }
-                else {
+                } else {
                     state.Traveled += vehicle.SpeedInMetersPerSecond;
                     state.IsChangingTire = CheckFlatTire(vehicle.FlatTireProbability);
                 }

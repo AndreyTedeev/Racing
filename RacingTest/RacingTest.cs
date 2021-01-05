@@ -1,45 +1,36 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Racing;
-using System.Collections.Generic;
 using System.IO;
 
-namespace RacingTest
-{
+namespace RacingTest {
 
     [TestClass]
-    public class RacingTest
-    {
+    public class RacingTest {
 
         const string GAME_PATH = "../../../game.json";
 
         [TestMethod]
-        public void Test_Config_Serialization()
-        {
+        public void Test_Config_Serialization() {
 
-            Game game = new()
-            {
+            Game game = new() {
 
                 Distance = 5000,
 
-                Vehicles = new()
-                {
-                    new Truck
-                    {
+                Vehicles = new() {
+                    new Truck {
                         Speed = 80.00,
                         FlatTireProbability = 10,
                         ChangeTireTime = 5,
                         CargoWeight = 1000
                     },
-                    new Car
-                    {
+                    new Car {
                         Speed = 100.00,
                         FlatTireProbability = 20,
                         ChangeTireTime = 4,
                         PassengerCount = 4
                     },
-                    new Motorcycle
-                    {
+                    new Motorcycle {
                         Speed = 100.00,
                         FlatTireProbability = 30,
                         ChangeTireTime = 3,
@@ -48,8 +39,7 @@ namespace RacingTest
                 }
             };
 
-            JsonSerializerSettings settings = new()
-            {
+            JsonSerializerSettings settings = new() {
                 TypeNameHandling = TypeNameHandling.All,
                 Formatting = Formatting.Indented
             };

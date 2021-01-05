@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Racing {
 
-    public class Truck: Vehicle {
+    public class Truck : Vehicle {
 
         /// <summary>
         /// Вес груза в килограммах
@@ -16,7 +16,7 @@ namespace Racing {
         public override string Name => "ГРУЗОВИК";
 
         public override string ToString() {
-            return $"{base.ToString()}, Вес груза: {CargoWeight}"; 
+            return $"{base.ToString()}, Вес груза: {CargoWeight}";
         }
 
     }
