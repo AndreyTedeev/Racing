@@ -46,19 +46,19 @@ namespace Racing {
             return $"{Name} | Скорость: {Speed} км/ч, Вероятность прокола: {FlatTireProbability} %";
         }
 
-        public override int GetHashCode() {
-            return FlatTireProbability ^ (int)Speed;
-        }
+        public override int GetHashCode() => (FlatTireProbability, Speed).GetHashCode();
 
-        public override bool Equals(object obj) {
-            if (obj == null || GetType() != obj.GetType()) {
-                return false;
-            }
+        // public override int GetHashCode() {
+        //     unchecked {
+        //         int hashcode = 4859604;
+        //         hashcode = hashcode * 4857562 ^ FlatTireProbability.GetHashCode();
+        //         hashcode = hashcode * 4857562 ^ Speed.GetHashCode();
+        //         return hashcode;
+        //     }
+        // }
 
-            Vehicle other = obj as Vehicle;
-            return (this.Speed == other.Speed)
-                & (this.FlatTireProbability == other.FlatTireProbability);
-        }
+        public override bool Equals(object other) => other is Vehicle v
+            && (v.Speed, v.FlatTireProbability).Equals((Speed, FlatTireProbability));
 
     }
 }
