@@ -12,6 +12,8 @@ namespace Racing {
         /// <summary>
         public int Distance { get; set; }
 
+
+
         /// <summary>
         /// Участники соревнований
         /// </summary>

@@ -26,16 +26,24 @@ namespace Racing {
         [JsonIgnore]
         public abstract string Name { get; }
 
+        private double _speed = 0;
         /// <summary>
         /// Скорость движения км/час
         /// </summary>
-        public double Speed { get; set; }
+        public double Speed {
+            get { return _speed; }
+            set {
+                _speed = value;
+                _speedInMetersPerSecond = (int)Speed * 1000 / 360;
+            }
+        }
 
+        private int _speedInMetersPerSecond = 0;
         /// <summary>
         /// Скорость движения м/с
         /// </summary>
         [JsonIgnore]
-        public int SpeedInMetersPerSecond => (int)Speed * 1000 / 360;
+        public int SpeedInMetersPerSecond => _speedInMetersPerSecond;
 
         /// <summary>
         /// Время на замену колеса в секундах
