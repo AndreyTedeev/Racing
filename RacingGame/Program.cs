@@ -26,16 +26,10 @@ namespace Racing {
                 Console.WriteLine($"{i}. {game.Vehicles[i - 1]}");
             Console.WriteLine();
             Console.WriteLine("ПОЕХАЛИ...");
-            _results = game.RunRace(OnUpdate);
+            _results = game.Run(OnGameUpdate);
         }
 
-        /// <summary>
-        /// Событие сделано для того чтобы отделить UI часть от собственно игры
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="vehicle"></param>
-        /// <param name="state"></param>
-        static void OnUpdate(int index, Vehicle vehicle, VehicleState state) {
+        static void OnGameUpdate(int index, Vehicle vehicle, VehicleState state) {
             string changingTire = state.IsChangingTire ? "Проколото колесо" : "Все в порядке      ";
             string traveled = String.Format("{0,5:0}", state.Traveled);
             string info = $"{vehicle.Name} : Пройдено {traveled} м. : {changingTire}";
@@ -76,11 +70,6 @@ namespace Racing {
             Console.ReadKey();
         }
 
-        /// <summary>
-        /// Загружает поараметры игры из файла
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
         static Game LoadFromFile(string fileName) {
             JsonSerializerSettings settings = new() {
                 TypeNameHandling = TypeNameHandling.All,

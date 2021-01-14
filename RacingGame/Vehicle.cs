@@ -1,19 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Racing {
 
     public abstract class Vehicle {
+        static readonly Random _random = new();
 
         private int _flatTireProbability = 0;
-
-        /// <summary>
-        /// Вероятность прокола колеса в процентах (0 - 100)
-        /// </summary>
         public int FlatTireProbability {
             get => _flatTireProbability;
             set {
@@ -26,47 +19,29 @@ namespace Racing {
         [JsonIgnore]
         public abstract string Name { get; }
 
-        private double _speed = 0;
-        /// <summary>
-        /// Скорость движения км/час
-        /// </summary>
-        public double Speed {
-            get { return _speed; }
+        private double _speedInKilometersPerHour = 0;
+        public double SpeedInKilometersPerHour {
+            get { return _speedInKilometersPerHour; }
             set {
-                _speed = value;
-                _speedInMetersPerSecond = (int)Speed * 1000 / 360;
+                _speedInKilometersPerHour = value;
+                _speedInMetersPerSecond = (int)SpeedInKilometersPerHour * 1000 / 360;
             }
         }
 
         private int _speedInMetersPerSecond = 0;
-        /// <summary>
-        /// Скорость движения м/с
-        /// </summary>
         [JsonIgnore]
         public int SpeedInMetersPerSecond => _speedInMetersPerSecond;
 
-        /// <summary>
-        /// Время на замену колеса в секундах
-        /// </summary>
-        public int ChangeTireTime { get; set; }
+        public int TimeToChangeTire { get; set; }
 
-        public override string ToString() {
-            return $"{Name} | Скорость: {Speed} км/ч, Вероятность прокола: {FlatTireProbability} %";
-        }
+        public bool IsFlatTire => _random.Next(1, 101) <= FlatTireProbability;
 
-        public override int GetHashCode() => (FlatTireProbability, Speed).GetHashCode();
+        public override string ToString() => $"{Name} | Скорость: {SpeedInKilometersPerHour} км/ч, Вероятность прокола: {FlatTireProbability} %";
 
-        // public override int GetHashCode() {
-        //     unchecked {
-        //         int hashcode = 4859604;
-        //         hashcode = hashcode * 4857562 ^ FlatTireProbability.GetHashCode();
-        //         hashcode = hashcode * 4857562 ^ Speed.GetHashCode();
-        //         return hashcode;
-        //     }
-        // }
+        public override int GetHashCode() => (FlatTireProbability, SpeedInKilometersPerHour).GetHashCode();
 
         public override bool Equals(object other) => other is Vehicle v
-            && (v.Speed, v.FlatTireProbability).Equals((Speed, FlatTireProbability));
+            && (v.SpeedInKilometersPerHour, v.FlatTireProbability).Equals((SpeedInKilometersPerHour, FlatTireProbability));
 
     }
 }
