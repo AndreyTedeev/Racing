@@ -8,9 +8,6 @@ namespace Racing {
 
     public class Motorcycle : Vehicle {
 
-        /// <summary>
-        /// Наличие коляски
-        /// </summary>
         public bool HasSidecar { get; set; }
 
         public override string Name => "МОТОЦИКЛ";

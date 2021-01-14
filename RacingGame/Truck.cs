@@ -8,16 +8,11 @@ namespace Racing {
 
     public class Truck : Vehicle {
 
-        /// <summary>
-        /// Вес груза в килограммах
-        /// </summary>
         public int CargoWeight { get; set; }
 
         public override string Name => "ГРУЗОВИК";
 
-        public override string ToString() {
-            return $"{base.ToString()}, Вес груза: {CargoWeight}";
-        }
+        public override string ToString() => $"{base.ToString()}, Вес груза: {CargoWeight}";
 
     }
 }
