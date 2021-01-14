@@ -46,5 +46,19 @@ namespace Racing {
             return $"{Name} | Скорость: {Speed} км/ч, Вероятность прокола: {FlatTireProbability} %";
         }
 
+        public override int GetHashCode() {
+            return FlatTireProbability ^ (int)Speed;
+        }
+
+        public override bool Equals(object obj) {
+            if (obj == null || GetType() != obj.GetType()) {
+                return false;
+            }
+
+            Vehicle other = obj as Vehicle;
+            return (this.Speed == other.Speed)
+                & (this.FlatTireProbability == other.FlatTireProbability);
+        }
+
     }
 }
