@@ -17,9 +17,6 @@ namespace Racing {
             }
         }
 
-        [JsonIgnore]
-        public abstract string Name { get; }
-
         private double _speedInKilometersPerHour = 0;
         public double SpeedInKilometersPerHour {
             get => _speedInKilometersPerHour; 
@@ -29,11 +26,15 @@ namespace Racing {
             }
         }
 
+        public int TimeToChangeTire { get; set; }
+
+        [JsonIgnore]
+        public abstract string Name { get; }
+
         [JsonIgnore]
         public int SpeedInMetersPerSecond { get; private set;}
 
-        public int TimeToChangeTire { get; set; }
-
+        [JsonIgnore]
         public bool IsFlatTire => _random.Next(1, 101) <= FlatTireProbability;
 
         public override string ToString() => $"{Name} | Скорость: {SpeedInKilometersPerHour} км/ч, Вероятность прокола: {FlatTireProbability} %";

@@ -9,24 +9,21 @@
         "CargoWeight": 1000,
         "FlatTireProbability": 10,
         "SpeedInKilometersPerHour": 80.0,
-        "TimeToChangeTire": 5,
-        "IsFlatTire": false
+        "TimeToChangeTire": 5
       },
       {
         "$type": "Racing.Car, RacingGame",
         "PassengerCount": 4,
         "FlatTireProbability": 20,
         "SpeedInKilometersPerHour": 100.0,
-        "TimeToChangeTire": 4,
-        "IsFlatTire": true
+        "TimeToChangeTire": 4
       },
       {
         "$type": "Racing.Motorcycle, RacingGame",
         "HasSidecar": false,
         "FlatTireProbability": 30,
         "SpeedInKilometersPerHour": 120.0,
-        "TimeToChangeTire": 3,
-        "IsFlatTire": false
+        "TimeToChangeTire": 3
       }
     ]
   }
