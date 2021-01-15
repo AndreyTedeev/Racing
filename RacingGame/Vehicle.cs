@@ -24,13 +24,12 @@ namespace Racing {
             get { return _speedInKilometersPerHour; }
             set {
                 _speedInKilometersPerHour = value;
-                _speedInMetersPerSecond = (int)SpeedInKilometersPerHour * 1000 / 360;
+                SpeedInMetersPerSecond = (int)value * 1000 / 360;
             }
         }
 
-        private int _speedInMetersPerSecond = 0;
         [JsonIgnore]
-        public int SpeedInMetersPerSecond => _speedInMetersPerSecond;
+        public int SpeedInMetersPerSecond { get; private set;}
 
         public int TimeToChangeTire { get; set; }
 
