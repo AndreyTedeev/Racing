@@ -7,15 +7,16 @@ namespace Racing {
     class Program {
 
         const string GAME_PATH = "../../../game.json";
-        static Dictionary<Vehicle, VehicleState> _results = null;
 
         static void Main() {
-            while (WannaPlay())
-                PlayGame();
+            while (WannaPlay()) {
+                var results = PlayGame();
+                PrintResults(results);
+            }
             GoodBye();
         }
 
-        static void PlayGame() {
+        static Dictionary<Vehicle, VehicleState> PlayGame() {
             Console.Clear();
             Game game = Game.LoadFromFile(GAME_PATH);
             Console.WriteLine("Сегодня в гонках участвуют:");
@@ -24,7 +25,7 @@ namespace Racing {
                 Console.WriteLine($"{i}. {game.Vehicles[i - 1]}");
             Console.WriteLine();
             Console.WriteLine("ПОЕХАЛИ...");
-            _results = game.Run(OnGameUpdate);
+            return game.Run(OnGameUpdate);
         }
 
         static void OnGameUpdate(int index, Vehicle vehicle, VehicleState state) {
@@ -35,22 +36,21 @@ namespace Racing {
             Console.WriteLine(info);
         }
 
-        static void PrintResults() {
-            if (_results is null)
+        static void PrintResults(Dictionary<Vehicle, VehicleState> results) {
+            if (results is null)
                 return;
             Console.Clear();
             Console.WriteLine("Таблица результатов");
             Console.WriteLine();
-            _results = _results.OrderByDescending(x => x.Value.Traveled).ToDictionary(x => x.Key, x => x.Value);
-            foreach (Vehicle vehicle in _results.Keys) {
-                Console.WriteLine($"{vehicle.Name} {_results[vehicle].Traveled}");
+            results = results.OrderByDescending(x => x.Value.Traveled).ToDictionary(x => x.Key, x => x.Value);
+            foreach (Vehicle vehicle in results.Keys) {
+                Console.WriteLine($"{vehicle.Name} {results[vehicle].Traveled}");
             }
             PrintCentered(new string[] { "Нажмите любую клавишу для выхода" });
             Console.ReadKey();
         }
 
         static bool WannaPlay() {
-            PrintResults();
             Console.Clear();
             PrintCentered(new string[] { "Игра ГОНКИ", "", "1 - Играть, 0 - Выход", "", "2020 - Андрей Тедеев" });
             while (true) {

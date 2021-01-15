@@ -64,9 +64,7 @@ namespace Racing {
         public static Game LoadFromFile(string fileName) =>
             JsonConvert.DeserializeObject<Game>(File.ReadAllText(fileName), JsonSerializerSettings);
 
-        public void SaveToFile(string fileName) {
+        public void SaveToFile(string fileName) =>
             File.WriteAllText(fileName, JsonConvert.SerializeObject(this, JsonSerializerSettings));
-        }
-
     }
 }
