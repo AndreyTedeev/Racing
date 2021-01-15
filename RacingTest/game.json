@@ -18,7 +18,7 @@
         "FlatTireProbability": 20,
         "SpeedInKilometersPerHour": 100.0,
         "TimeToChangeTire": 4,
-        "IsFlatTire": false
+        "IsFlatTire": true
       },
       {
         "$type": "Racing.Motorcycle, RacingGame",

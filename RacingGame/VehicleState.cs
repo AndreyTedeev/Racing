@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Racing {
 
-namespace Racing {
+    public interface VehicleState {
 
-    public class VehicleState {
+        public Vehicle Vehicle { get; }
 
-        public int Traveled { get; set; } = 0;
+        public int Traveled { get; set; }
 
-        public bool IsChangingTire { get; set; } = false;
+        public bool IsChangingTire { get; set; }
 
-        public int RepairingTime { get; set; } = 0;
+        public int RepairingTime { get; set; }
 
     }
 }

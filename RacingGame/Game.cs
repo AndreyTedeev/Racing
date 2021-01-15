@@ -12,7 +12,7 @@ namespace Racing {
 
         public List<Vehicle> Vehicles { get; set; }
 
-        private Dictionary<Vehicle, VehicleState> _states;
+        private List<VehicleState> _states;
 
         private bool _running = false;
 
@@ -20,10 +20,10 @@ namespace Racing {
             _states = new();
             _running = true;
             foreach (Vehicle vehicle in Vehicles)
-                _states.Add(vehicle, new VehicleState());
+                _states.Add(new VehicleStateImpl( vehicle) );
         }
 
-        public Dictionary<Vehicle, VehicleState> Run(Action<int, Vehicle, VehicleState> OnUpdate) {
+        public List<VehicleState> Run(Action<int, VehicleState> OnUpdate) {
             Init();
             while (_running) {
                 Update(OnUpdate);
@@ -32,21 +32,20 @@ namespace Racing {
             return _states;
         }
 
-        private void Update(Action<int, Vehicle, VehicleState> OnUpdate) {
+        private void Update(Action<int, VehicleState> OnUpdate) {
             int pos = 0;
             int mostTraveled = 0;
-            foreach (Vehicle vehicle in _states.Keys) {
-                VehicleState state = _states[vehicle];
-                OnUpdate?.Invoke(pos++, vehicle, state);
+            foreach (VehicleState state in _states) {
+                OnUpdate?.Invoke(pos++, state);
                 if (state.IsChangingTire) {
-                    if (++state.RepairingTime == vehicle.TimeToChangeTire) {
+                    if (++state.RepairingTime == state.Vehicle.TimeToChangeTire) {
                         state.IsChangingTire = false;
                         state.RepairingTime = 0;
                     }
                 }
                 else {
-                    state.Traveled += vehicle.SpeedInMetersPerSecond;
-                    state.IsChangingTire = vehicle.IsFlatTire;
+                    state.Traveled += state.Vehicle.SpeedInMetersPerSecond;
+                    state.IsChangingTire = state.Vehicle.IsFlatTire;
                 }
                 if (state.Traveled > mostTraveled)
                     mostTraveled = state.Traveled;

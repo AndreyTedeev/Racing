@@ -16,7 +16,7 @@ namespace Racing {
             GoodBye();
         }
 
-        static Dictionary<Vehicle, VehicleState> PlayGame() {
+        static List<VehicleState> PlayGame() {
             Console.Clear();
             Game game = Game.LoadFromFile(GAME_PATH);
             Console.WriteLine("Сегодня в гонках участвуют:");
@@ -28,23 +28,23 @@ namespace Racing {
             return game.Run(OnGameUpdate);
         }
 
-        static void OnGameUpdate(int index, Vehicle vehicle, VehicleState state) {
+        static void OnGameUpdate(int index, VehicleState state) {
             string changingTire = state.IsChangingTire ? "Проколото колесо" : "Все в порядке      ";
             string traveled = String.Format("{0,5:0}", state.Traveled);
-            string info = $"{vehicle.Name} : Пройдено {traveled} м. : {changingTire}";
+            string info = $"{state.Vehicle.Name} : Пройдено {traveled} м. : {changingTire}";
             Console.SetCursorPosition(0, 10 + index);
             Console.WriteLine(info);
         }
 
-        static void PrintResults(Dictionary<Vehicle, VehicleState> results) {
+        static void PrintResults(List<VehicleState> results) {
             if (results is null)
                 return;
             Console.Clear();
             Console.WriteLine("Таблица результатов");
             Console.WriteLine();
-            results = results.OrderByDescending(x => x.Value.Traveled).ToDictionary(x => x.Key, x => x.Value);
-            foreach (Vehicle vehicle in results.Keys) {
-                Console.WriteLine($"{vehicle.Name} {results[vehicle].Traveled}");
+            results = results.OrderByDescending(x => x.Traveled).ToList();
+            foreach (VehicleState state in results) {
+                Console.WriteLine($"{state.Vehicle.Name} {state.Traveled}");
             }
             PrintCentered(new string[] { "Нажмите любую клавишу для выхода" });
             Console.ReadKey();
