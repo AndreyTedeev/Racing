@@ -39,13 +39,9 @@ namespace RacingTest {
                 }
             };
 
-            JsonSerializerSettings settings = new() {
-                TypeNameHandling = TypeNameHandling.All,
-                Formatting = Formatting.Indented
-            };
-            File.WriteAllText(GAME_PATH, JsonConvert.SerializeObject(game, settings));
+            game.SaveToFile(GAME_PATH);
 
-            game = JsonConvert.DeserializeObject<Game>(File.ReadAllText(GAME_PATH), settings);
+            game = Game.LoadFromFile(GAME_PATH);
 
             Assert.IsTrue(game.DistanceInMeters == 5000);
             Assert.IsTrue(game.Vehicles.Count == 3);

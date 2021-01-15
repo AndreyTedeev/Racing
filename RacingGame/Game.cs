@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading;
 
 namespace Racing {
@@ -42,7 +43,8 @@ namespace Racing {
                         state.IsChangingTire = false;
                         state.RepairingTime = 0;
                     }
-                } else {
+                }
+                else {
                     state.Traveled += vehicle.SpeedInMetersPerSecond;
                     state.IsChangingTire = vehicle.IsFlatTire;
                 }
@@ -50,6 +52,20 @@ namespace Racing {
                     mostTraveled = state.Traveled;
             }
             _running = (mostTraveled < DistanceInMeters);
+        }
+
+        static JsonSerializerSettings _jsonSerializerSettings;
+        static JsonSerializerSettings JsonSerializerSettings =>
+            _jsonSerializerSettings ??= new() {
+                TypeNameHandling = TypeNameHandling.All,
+                Formatting = Formatting.Indented
+            };
+
+        public static Game LoadFromFile(string fileName) =>
+            JsonConvert.DeserializeObject<Game>(File.ReadAllText(fileName), JsonSerializerSettings);
+
+        public void SaveToFile(string fileName) {
+            File.WriteAllText(fileName, JsonConvert.SerializeObject(this, JsonSerializerSettings));
         }
 
     }

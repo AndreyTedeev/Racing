@@ -1,7 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace Racing {
@@ -19,7 +17,7 @@ namespace Racing {
 
         static void PlayGame() {
             Console.Clear();
-            Game game = LoadFromFile(GAME_PATH);
+            Game game = Game.LoadFromFile(GAME_PATH);
             Console.WriteLine("Сегодня в гонках участвуют:");
             Console.WriteLine();
             for (int i = 1; i <= game.Vehicles.Count; i++)
@@ -68,14 +66,6 @@ namespace Racing {
             Console.Clear();
             PrintCentered(new string[] { "СПАСИБО! До Встречи...", "", "Нажмите любую клавишу для выхода" });
             Console.ReadKey();
-        }
-
-        static Game LoadFromFile(string fileName) {
-            JsonSerializerSettings settings = new() {
-                TypeNameHandling = TypeNameHandling.All,
-                Formatting = Formatting.Indented
-            };
-            return JsonConvert.DeserializeObject<Game>(File.ReadAllText(fileName), settings);
         }
 
         public static void PrintCentered(string[] messages) {

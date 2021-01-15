@@ -4,6 +4,7 @@ using System;
 namespace Racing {
 
     public abstract class Vehicle {
+
         static readonly Random _random = new();
 
         private int _flatTireProbability = 0;
@@ -21,7 +22,7 @@ namespace Racing {
 
         private double _speedInKilometersPerHour = 0;
         public double SpeedInKilometersPerHour {
-            get { return _speedInKilometersPerHour; }
+            get => _speedInKilometersPerHour; 
             set {
                 _speedInKilometersPerHour = value;
                 SpeedInMetersPerSecond = (int)value * 1000 / 360;
