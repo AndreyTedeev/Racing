@@ -12,7 +12,7 @@ namespace Racing {
 
         public List<Vehicle> Vehicles { get; set; }
 
-        private List<VehicleState> _states;
+        private List<IVehicleState> _states;
 
         private bool _running = false;
 
@@ -23,7 +23,7 @@ namespace Racing {
                 _states.Add(new VehicleStateImpl( vehicle) );
         }
 
-        public List<VehicleState> Run(Action<int, VehicleState> OnUpdate) {
+        public List<IVehicleState> Run(Action<int, IVehicleState> OnUpdate) {
             Init();
             while (_running) {
                 Update(OnUpdate);
@@ -32,10 +32,10 @@ namespace Racing {
             return _states;
         }
 
-        private void Update(Action<int, VehicleState> OnUpdate) {
+        private void Update(Action<int, IVehicleState> OnUpdate) {
             int pos = 0;
             int mostTraveled = 0;
-            foreach (VehicleState state in _states) {
+            foreach (IVehicleState state in _states) {
                 OnUpdate?.Invoke(pos++, state);
                 if (state.IsChangingTire) {
                     if (++state.RepairingTime == state.Vehicle.TimeToChangeTire) {

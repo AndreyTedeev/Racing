@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Racing {
 
-    public class VehicleStateImpl : VehicleState {
+    public class VehicleStateImpl : IVehicleState {
 
         public VehicleStateImpl(Vehicle vehicle) {
             Vehicle = vehicle;

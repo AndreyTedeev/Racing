@@ -1,6 +1,6 @@
 ﻿namespace Racing {
 
-    public interface VehicleState {
+    public interface IVehicleState {
 
         public Vehicle Vehicle { get; }
 
